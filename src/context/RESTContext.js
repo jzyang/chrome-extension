@@ -61,6 +61,7 @@ export function RestProvider( {children} ) {
         // const url = "https://dev122899.service-now.com/api/now/table/incident";
         // const url = "/incident"
         const url = "http://localhost:8082/serviceName/incident"
+        // TODO sys_id is used in get, may want to retain that info to get incident again
 
         return fetch(url, {
             method: 'POST',
