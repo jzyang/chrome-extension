@@ -16,6 +16,7 @@ export function useRest() {
 }
 
 export function RestProvider( {children} ) {
+    console.log("Got to RestProvider")
     const { currentUser } = useAuth();
 
     const [data, setData] = useState("");

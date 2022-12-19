@@ -19,6 +19,8 @@ function Signup() {
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
 
+	console.log("Got to Signup.js")
+
 	async function handleSubmit(e) {
 		e.preventDefault() // Prevent refresh
 

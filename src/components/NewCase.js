@@ -11,9 +11,11 @@ function NewCase() {
 
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
-	const [incidentNo, setIncidentNo] = useState();
+	const [incidentNo, setIncidentNo] = useState('');
 
 	const { createIncident } = useRest();
+
+	console.log("Got to NewCase.js")
 
 	async function handleCreateCase(e) {
 		e.preventDefault() // Prevent refresh

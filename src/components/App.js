@@ -6,28 +6,30 @@ import ResetPassword from "./ResetPassword";
 import PrivateRoute from "./PrivateRoute";
 import {Container} from "react-bootstrap";
 import {AuthProvider} from "../context/AuthContext";
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {MemoryRouter, Routes, Route} from "react-router-dom";
 import {RestProvider} from "../context/RESTContext";
 
 function App() {
+    console.log("Got to App.js")
+
     return (
         <Container className="d-flex align-items-center justify-content-center" style={{minHeight: "100vh"}}>
             <div className="w-100" style={{maxWidth: "400px"}}>
-                <BrowserRouter>
+                <MemoryRouter>
                     <AuthProvider>
                         <RestProvider>
-                        <Routes>
-                            <Route path="/" index element={<Login/>}/>
-                            <Route path="/dash"
-                                   element={<PrivateRoute>
-                                       <NewCase/>
-                                   </PrivateRoute>}/>
-                            <Route path="/signup" element={<Signup/>}/>
-                            <Route path="/reset-password" element={<ResetPassword/>}/>
-                        </Routes>
-                    </RestProvider>
+                            <Routes>
+                                <Route path="/" index element={<Login/>}/>
+                                <Route path="/dash"
+                                       element={<PrivateRoute>
+                                           <NewCase/>
+                                       </PrivateRoute>}/>
+                                <Route path="/signup" element={<Signup/>}/>
+                                <Route path="/reset-password" element={<ResetPassword/>}/>
+                            </Routes>
+                        </RestProvider>
                     </AuthProvider>
-                </BrowserRouter>
+                </MemoryRouter>
             </div>
         </Container>
     );

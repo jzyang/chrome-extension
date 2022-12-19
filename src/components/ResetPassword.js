@@ -11,6 +11,7 @@ function ResetPassword() {
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [message, setMessage] = useState('');
+	console.log("Got to ResetPassword.js")
 
 	async function handleSubmit(e) {
 		e.preventDefault() // Prevent refresh
