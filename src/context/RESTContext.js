@@ -18,7 +18,6 @@ export function useRest() {
 export function RestProvider( {children} ) {
     const { currentUser } = useAuth();
 
-    const [data, setData] = useState("");
     const [error, setError] = useState("");
 
     function createUser(user) {
@@ -43,10 +42,18 @@ export function RestProvider( {children} ) {
             })
         })
             .then(resp => {
-                console.log("Header: " + resp.req)
-                return resp.json()
+                if (!resp.ok) {
+                    console.log("Response: Failed to create new user")
+                    const error = resp.status;
+                    return Promise.reject(error);
+                }
+
+                return resp.json();
             })
-            .then(data => setData(data))
+            .then(data => {
+                console.log(data)
+                return data;
+            })
             .catch(error => setError(error));
     }
 
@@ -70,20 +77,19 @@ export function RestProvider( {children} ) {
         })
             .then(async resp => {
                 if (!resp.ok) {
-                    console.log("Response: Failed to get 201")
-                    const error = (data && data.message) || resp.status;
+                    console.log("Response: Failed to create Incident")
+                    const error = resp.status;
                     return Promise.reject(error);
                 }
 
                 return resp.json();
             })
-            .then(respJson => {
-                console.log('Data: ' + respJson);
-                setData(respJson);
-                return respJson.number;
+            .then(data => {
+                // Return the incident number
+                return data.result.number;
             })
             .catch(error => {
-                console.log('Error: ' + error.message);
+                console.log(error);
                 setError(error);
             });
     }

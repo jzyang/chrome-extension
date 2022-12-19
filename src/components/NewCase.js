@@ -12,6 +12,7 @@ function NewCase() {
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [incidentNo, setIncidentNo] = useState('');
+	const [firstName, setFirstName] = useState(currentUser.email);
 
 	const { createIncident } = useRest();
 
@@ -46,11 +47,11 @@ function NewCase() {
 		<>
 			<Card>
 				<Card.Body>
-					<h2 className="text-center mb-4">New Case</h2>
+					<h2 className="text-center mb-4">{currentUser.email}</h2>
 					{incidentNo && <Alert variant="success">{incidentNo}</Alert>}
 					{error && <Alert variant="danger">{error}</Alert>}
 					<Button disabled={loading} className="w-100" type="submit" onClick={handleCreateCase}>
-						Create
+						Create Case
 					</Button>
 				</Card.Body>
 			</Card>
