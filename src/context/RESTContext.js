@@ -22,13 +22,13 @@ export function RestProvider( {children} ) {
 
     function createUser(user) {
         // const url = "https://dev122899.service-now.com/api/now/table/imp_user";
-        const url = "/imp_user"
-        console.log(url)
+        // const url = "/imp_user"
+        const url = "http://localhost:8082/serviceName/user"
+
         const header = {
             'Access-Control-Allow-Origin': "*",
             'Content-Type': 'application/json; charset=UTF-8',
             'Accept': 'application/json',
-            'Authorization': 'Basic ' + Buffer.from('admin:cSd@hKSD30$k').toString('base64')
         }
 
         return fetch(url, {
@@ -59,7 +59,8 @@ export function RestProvider( {children} ) {
 
     function createIncident() {
         // const url = "https://dev122899.service-now.com/api/now/table/incident";
-        const url = "/incident"
+        // const url = "/incident"
+        const url = "http://localhost:8082/serviceName/incident"
 
         return fetch(url, {
             method: 'POST',
@@ -67,7 +68,6 @@ export function RestProvider( {children} ) {
                 'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json; charset=UTF-8',
                 'Accept': 'application/json',
-                'Authorization': 'Basic ' + Buffer.from('admin:cSd@hKSD30$k').toString('base64')
             },
             body: JSON.stringify({
                 active: true,
@@ -86,6 +86,7 @@ export function RestProvider( {children} ) {
             })
             .then(data => {
                 // Return the incident number
+                console.log(data)
                 return data.result.number;
             })
             .catch(error => {
