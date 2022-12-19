@@ -46,5 +46,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "https://dev122899.service-now.com/api/now/table"
 }

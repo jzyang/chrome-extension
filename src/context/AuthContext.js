@@ -12,8 +12,6 @@ export function AuthProvider( {children} ) {
     const [currentUser, setCurrentUser] = useState();
     const [loading, setLoading] = useState(true);
 
-    console.log("Go to AuthProvider")
-
     function signup( email, password ) {
         // Return a promise
         return createUserWithEmailAndPassword(auth, email, password);

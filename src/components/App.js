@@ -10,8 +10,6 @@ import {MemoryRouter, Routes, Route} from "react-router-dom";
 import {RestProvider} from "../context/RESTContext";
 
 function App() {
-    console.log("Got to App.js")
-
     return (
         <Container className="d-flex align-items-center justify-content-center" style={{minHeight: "100vh"}}>
             <div className="w-100" style={{maxWidth: "400px"}}>

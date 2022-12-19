@@ -15,8 +15,6 @@ function NewCase() {
 
 	const { createIncident } = useRest();
 
-	console.log("Got to NewCase.js")
-
 	async function handleCreateCase(e) {
 		e.preventDefault() // Prevent refresh
 

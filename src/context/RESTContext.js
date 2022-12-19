@@ -16,14 +16,14 @@ export function useRest() {
 }
 
 export function RestProvider( {children} ) {
-    console.log("Got to RestProvider")
     const { currentUser } = useAuth();
 
     const [data, setData] = useState("");
     const [error, setError] = useState("");
 
     function createUser(user) {
-        const url = "https://dev122899.service-now.com/api/now/table/imp_user";
+        // const url = "https://dev122899.service-now.com/api/now/table/imp_user";
+        const url = "/imp_user"
         console.log(url)
         const header = {
             'Access-Control-Allow-Origin': "*",
@@ -51,7 +51,8 @@ export function RestProvider( {children} ) {
     }
 
     function createIncident() {
-        const url = "https://dev122899.service-now.com/api/now/table/incident";
+        // const url = "https://dev122899.service-now.com/api/now/table/incident";
+        const url = "/incident"
 
         return fetch(url, {
             method: 'POST',
