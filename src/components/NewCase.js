@@ -1,59 +1,66 @@
-import React, {useRef, useState} from 'react';
-import { Form, Button, Card, Alert } from 'react-bootstrap';
+import React, {useState} from 'react';
+import { Button, Card, Alert } from 'react-bootstrap';
 import { useAuth } from '../context/AuthContext';
-import { Link } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
+import {useRest} from "../context/RESTContext";
 
-function Login() {
-	const emailRef = useRef();
-	const passwordRef = useRef();
+function NewCase() {
+	const { currentUser, logout } = useAuth();
 
-	const { login } = useAuth();
+	const navigate = useNavigate();
 
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
+	const [incidentNo, setIncidentNo] = useState();
 
-	async function handleSubmit(e) {
+	const { createIncident } = useRest();
+
+	async function handleCreateCase(e) {
 		e.preventDefault() // Prevent refresh
 
 		try {
 			setError("");
 			// Prevent user from clicking login after already having clicked it
 			setLoading(true);
-			await login(emailRef.current.value, passwordRef.current.value);
+			setIncidentNo(await createIncident());
+			console.log("New incident number is: " + incidentNo);
 		} catch (error) {
 			console.log(error.message);
-			setError("Failed to Log in User");
+			setError("Failed to Create a New Case");
 		}
 		setLoading(false);
+	}
+
+	async function handleLogout(e) {
+		setError("");
+
+		try {
+			await logout();
+			navigate("/");
+		} catch (error) {
+			setError("Failed to successfully log out for: " + currentUser.email);
+		}
 	}
 
 	return (
 		<>
 			<Card>
 				<Card.Body>
-					<h2 className="text-center mb-4">Log In</h2>
+					<h2 className="text-center mb-4">New Case</h2>
+					{incidentNo && <Alert variant="success">{incidentNo}</Alert>}
 					{error && <Alert variant="danger">{error}</Alert>}
-					<Form onSubmit={ handleSubmit }>
-						<Form.Group id="email">
-							<Form.Label>Email</Form.Label>
-							<Form.Control type="email" ref={emailRef} required/>
-						</Form.Group>
-						<Form.Group id="password" className="mb-4">
-							<Form.Label>Password</Form.Label>
-							<Form.Control type="password" ref={passwordRef} required/>
-						</Form.Group>
-
-						<Button disabled={loading} className="w-100" type="submit">
-							Log In
-						</Button>
-					</Form>
+					<Button disabled={loading} className="w-100" type="submit" onClick={handleCreateCase}>
+						Create
+					</Button>
 				</Card.Body>
 			</Card>
 			<div className="w-100 text-center mt-2">
-				Need an Account? <Link to="/signup">Sign Up</Link>
+				<Button className="w-100" variant="link" onClick={handleLogout}>
+					Logout
+				</Button>
 			</div>
 		</>
 	);
 }
 
-export default Login;
+export default NewCase;

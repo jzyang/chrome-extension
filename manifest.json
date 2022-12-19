@@ -4,7 +4,7 @@
     "description": "Create new ticket in Salesforce",
     "version": "1.0",
     "action": {
-        "default_popup": "index.html",
+        "default_popup": "public/index.html",
         "default_icon": "images/hello_extensions.png"
     }
 }
