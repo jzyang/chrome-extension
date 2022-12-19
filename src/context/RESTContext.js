@@ -1,6 +1,5 @@
 import React, {useContext, useState} from "react";
 import {useAuth} from "./AuthContext";
-// import {useServiceNow} from "./ServiceNowContext";
 import { Buffer } from "buffer";
 
 /**
@@ -17,7 +16,6 @@ export function useRest() {
 }
 
 export function RestProvider( {children} ) {
-    // const {createUserUrl, getDefaultHeader, createUserBody, createUrl, createIncidentBody} = useServiceNow();
     const { currentUser } = useAuth();
 
     const [data, setData] = useState("");
