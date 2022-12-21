@@ -47,7 +47,7 @@ function ResetPassword() {
 						</Button>
 					</Form>
 					<div className="w-100 text-center mt-3">
-						<Link to="/">Login</Link>
+						<Link to="/login">Login</Link>
 					</div>
 				</Card.Body>
 			</Card>

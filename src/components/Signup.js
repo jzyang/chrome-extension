@@ -32,17 +32,15 @@ function Signup() {
 			setLoading(true);
 			await signup(emailRef.current.value, passwordRef.current.value)
 				.then(resp => {
-					const user = {
-						firstName: firstNameRef.current.value,
-						lastName: lastNameRef.current.value,
-						email: resp.user.email,
-						uid: resp.user.uid
-					};
+					const user = resp.user;
+					user.firstName = firstNameRef.current.value;
+					user.lastName = lastNameRef.current.value;
 
+					localStorage.setItem("user", user);
 					return createUser(user);
 				})
 				.catch(error => console.log(error));
-			navigate("/dash");
+			navigate("/");
 		} catch (error) {
 			setError("Failed to create an account");
 		}
@@ -84,7 +82,7 @@ function Signup() {
 				</Card.Body>
 			</Card>
 			<div className="w-100 text-center mt-2">
-				Already have an Account? <Link to="/">Log In</Link>
+				Already have an Account? <Link to="/login">Log In</Link>
 			</div>
 		</>
 	);

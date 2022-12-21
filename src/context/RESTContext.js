@@ -1,6 +1,5 @@
 import React, {useContext, useState} from "react";
 import {useAuth} from "./AuthContext";
-import { Buffer } from "buffer";
 
 /**
  * 1. Takes in args: URL depending on if Zen/Sales/SN
@@ -50,14 +49,14 @@ export function RestProvider( {children} ) {
 
                 return resp.json();
             })
-            .then(data => {
-                console.log(data)
-                return data;
+            .then(json => {
+                console.log(json)
+                return json;
             })
-            .catch(error => setError(error));
+            .catch(err => setError(err));
     }
 
-    function createIncident() {
+    function createIncident(incident) {
         // const url = "https://dev122899.service-now.com/api/now/table/incident";
         // const url = "/incident"
         const url = "http://localhost:8082/serviceName/incident"
@@ -71,9 +70,12 @@ export function RestProvider( {children} ) {
                 'Accept': 'application/json',
             },
             body: JSON.stringify({
-                active: true,
-                caller_id: currentUser.uid,
-                short_description: 'Chrome extension generated case'
+                active: incident.active,
+                caller_id: incident.userId,
+                severity: incident.severity,
+                urgency: incident.urgency,
+                priority: incident.priority,
+                short_description: incident.description
             })
         })
             .then(async resp => {
@@ -85,14 +87,16 @@ export function RestProvider( {children} ) {
 
                 return resp.json();
             })
-            .then(data => {
+            .then(json => {
                 // Return the incident number
+                const data = json.result;
                 console.log(data)
-                return data.result.number;
+                localStorage.setItem("incident", data);
+                return data;
             })
-            .catch(error => {
-                console.log(error);
-                setError(error);
+            .catch(err => {
+                console.log(err);
+                setError(err);
             });
     }
 

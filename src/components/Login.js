@@ -21,8 +21,8 @@ function Login() {
 			setError("");
 			// Prevent user from clicking login after already having clicked it
 			setLoading(true);
-			await login(emailRef.current.value, passwordRef.current.value);
-			navigate("/dash");
+			localStorage.setItem("user", await login(emailRef.current.value, passwordRef.current.value));
+			navigate("/");
 		} catch (error) {
 			setError("Failed to Log in as: " + emailRef.current.value);
 		}

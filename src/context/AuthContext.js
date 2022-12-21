@@ -9,7 +9,7 @@ export function useAuth() {
 }
 
 export function AuthProvider( {children} ) {
-    const [currentUser, setCurrentUser] = useState();
+    const [currentUser, setCurrentUser] = useState(localStorage.getItem("user"));
     const [loading, setLoading] = useState(true);
 
     function signup( email, password ) {
@@ -22,6 +22,8 @@ export function AuthProvider( {children} ) {
     }
 
     function logout() {
+        console.log("logout")
+        console.log(currentUser)
         return signOut(auth);
     }
 
@@ -32,7 +34,9 @@ export function AuthProvider( {children} ) {
     useEffect(() => {
             // Detect auth state change
             const unsubscribe = auth.onAuthStateChanged(user => {
+                console.log("User:")
                 console.log(user)
+                console.log(currentUser)
                 setCurrentUser(user);
                 setLoading(false);
             });
