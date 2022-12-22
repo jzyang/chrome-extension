@@ -4,6 +4,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
+File structure:
+* _/public_ holds: _index.html_ (used for the pop-up)
+* _/src_ holds: All React scripts used
+  * _/components_ holds: Signup, Login, New case, etc.
+  * _/context_ holds: Auth and REST context
+    * Auth context compartmentalized to allow different authorizations
+    * REST context allows fetch from ServiceNow
+
 In the project directory, you can run:
 
 ### `npm start`
