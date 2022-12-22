@@ -22,7 +22,7 @@ export function RestProvider( {children} ) {
     function createUser(user) {
         // const url = "https://dev122899.service-now.com/api/now/table/imp_user";
         // const url = "/imp_user"
-        const url = "http://localhost:8082/serviceName/user"
+        const url = "http://localhost:8082/serviceNow/user"
 
         const header = {
             'Access-Control-Allow-Origin': "*",
@@ -59,7 +59,7 @@ export function RestProvider( {children} ) {
     function createIncident(incident) {
         // const url = "https://dev122899.service-now.com/api/now/table/incident";
         // const url = "/incident"
-        const url = "http://localhost:8082/serviceName/incident"
+        const url = "http://localhost:8082/serviceNow/incident"
         // TODO sys_id is used in get, may want to retain that info to get incident again
 
         return fetch(url, {

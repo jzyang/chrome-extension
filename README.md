@@ -11,6 +11,8 @@ File structure:
   * _/context_ holds: Auth and REST context
     * Auth context compartmentalized to allow different authorizations
     * REST context allows fetch from ServiceNow
+* Current flow:
+  * pop-up => public/index.html => src/index.js => src/components/App.js
 
 In the project directory, you can run:
 
